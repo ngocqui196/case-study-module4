@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/views/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="font-weight-bold text-center">Category Management</h1>
+<h3 class="font-weight-bold text-center">Form create Category</h3>
+
+<div class="row">
+    <div class="container">
+        <hr>
+        <th:block th:if="${message}">
+            <p th:text="${message}"></p>
+        </th:block>
+        <a th:href="@{/templates/views/admin/category/list}">Category list</a>
+        <form th:action="@{/templates/views/admin/category/create}" th:object="${category}" method="post">
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Category Name</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="categoryName" th:field="*{categoryName}"
+                           id="categoryName"
+                           placeholder="Name">
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Category Description</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" th:field="*{description}" name="description"
+                           id="description"
+                           placeholder="Description">
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <input th:type="hidden" name="statusCategory"
+                   id="statusCategory" value="1">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary" type="submit" value="Save">Save</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-danger" type="reset">Reset</button>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<footer th:replace="/views/layout :: footer"></footer>
+</body>
+
+</html>
