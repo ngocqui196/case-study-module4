@@ -2,6 +2,7 @@ package com.codegym.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class Role implements Serializable {
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<Seller> sellers;
+    private List<Seller> sellers;
 
 
     public Long getId() {
