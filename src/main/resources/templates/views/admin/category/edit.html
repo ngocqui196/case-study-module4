@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/views/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span th:text="${message} ? ${message} : '' "></span>
+<h1>Category</h1>
+<a th:href="@{/templates/views/admin/category/list}">Category list</a>
+<form th:action="@{/templates/views/admin/category-edit}" th:object="${category}" method="post">
+    <input type="hidden" th:field ="*{id}">
+    <div class="form-group row">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Category Name</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="categoryName" th:field="*{categoryName}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Category Description</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="description" th:field="*{description}" />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <input type="hidden" th:field ="*{statusCategory}">
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" type="submit" value="Save">Save</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-danger" type="reset">Reset</button>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</form>
+<!--<div>-->
+<!--    <a th:href="@{'/customers'(s=${keyword}, page=${customers.number})}" th:if="${customers.hasPrevious()}">Previous</a>-->
+<!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
+<!--    <a th:href="@{'/customers'(s=${keyword}, page=${customers.number + 2})}" th:if="${customers.hasNext()}">Next</a>-->
+<!--</div>-->
+<footer th:replace="/views/layout :: footer"></footer>
+</body>
+</html>
