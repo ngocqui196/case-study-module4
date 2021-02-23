@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,7 +11,7 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
+    
     @Column(name = "name")
     private String name;
 
@@ -35,7 +36,7 @@ public class Seller {
             joinColumns = @JoinColumn(name = "seller_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_role_id",referencedColumnName = "role_id")
     )
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -93,11 +94,11 @@ public class Seller {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

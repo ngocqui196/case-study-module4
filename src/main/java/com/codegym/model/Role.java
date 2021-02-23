@@ -2,6 +2,7 @@ package com.codegym.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,14 +13,14 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column("role_id")
+    @Column(name = "role_id")
     private Long id;
 
     @Column(name = "name_role")
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<Seller> sellers;
+    private List<Seller> sellers;
 
 
     public Long getId() {
