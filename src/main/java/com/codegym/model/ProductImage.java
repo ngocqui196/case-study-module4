@@ -8,33 +8,37 @@ import javax.validation.constraints.NotEmpty;
 public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @NotEmpty(message = "Please input name")
+    private Long id;
+
     private String nameImage;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", unique = true, nullable = true)
     private Product product;
 
     public ProductImage() {
     }
 
-    public ProductImage(long id, @NotEmpty(message = "Please input name") String nameImage) {
-        this.id = id;
+    public ProductImage(String nameImage) {
         this.nameImage = nameImage;
     }
 
-    public ProductImage(long id, @NotEmpty(message = "Please input name") String nameImage, Product product) {
+    public ProductImage(String nameImage, Product product) {
+        this.nameImage = nameImage;
+        this.product = product;
+    }
+
+    public ProductImage(Long id, String nameImage, Product product) {
         this.id = id;
         this.nameImage = nameImage;
 //        this.product = product;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

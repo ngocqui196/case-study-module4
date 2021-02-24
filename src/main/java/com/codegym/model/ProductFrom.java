@@ -1,28 +1,50 @@
 package com.codegym.model;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.multipart.MultipartFile;
 
-public class ProductFrom {
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+
+public class ProductFrom implements Serializable {
+
     private Long id;
+    @NotEmpty(message = "Please input productName")
+    @Size(max = 45)
     private String productName;
+    @NotEmpty(message = "Please input productPrice")
     private double price;
+    @NotEmpty(message = "Please input productQuantity")
     private int quantity;
+    @NotEmpty(message = "Please input discount")
     private int discount;
+    @NotEmpty(message = "Please input realPrice")
     private double realPrice;
-    private String type;
+    @NotEmpty(message = "Please input descriptionProduct")
+    @Size(max = 255)
     private String description;
+    @NotEmpty
+    private Long category_id;
+    @NotEmpty
     private MultipartFile images;
+    @Column(columnDefinition = "integer default 1")
     private int statusProduct;
 
-    public ProductFrom(Long id, String productName, double price, int quantity, int discount, double realPrice, String type, String description, MultipartFile images, int statusProduct) {
+    public ProductFrom() {
+    }
+
+    public ProductFrom(Long id, @NotEmpty(message = "Please input productName") @Size(max = 45) String productName, @NotEmpty(message = "Please input productPrice") double price, @NotEmpty(message = "Please input productQuantity") int quantity, @NotEmpty(message = "Please input discount") int discount, @NotEmpty(message = "Please input realPrice") double realPrice, @NotNull(message = "Please input descriptionProduct") @Size(max = 255) String description, @NotEmpty Long category_id, @NotEmpty MultipartFile images, int statusProduct) {
         this.id = id;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.discount = discount;
         this.realPrice = realPrice;
-        this.type = type;
         this.description = description;
+        this.category_id = category_id;
         this.images = images;
         this.statusProduct = statusProduct;
     }
@@ -75,20 +97,20 @@ public class ProductFrom {
         this.realPrice = realPrice;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
     }
 
     public MultipartFile getImages() {

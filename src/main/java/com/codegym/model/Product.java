@@ -16,24 +16,19 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Please input productName")
-    @Size(max = 45)
+
     private String productName;
-    @NotEmpty(message = "Please input productPrice")
+
     private double price;
-    @NotEmpty(message = "Please input productQuantity")
+
     private int quantity;
-    @NotEmpty(message = "Please input discount")
+
     private int discount;
-    @NotEmpty(message = "Please input realPrice")
+
     private double realPrice;
-    @NotEmpty(message = "Please input type")
-    @Size(max = 45)
-    private String type;
-    @NotNull(message = "Please input descriptionProduct")
-    @Size(max = 255)
+
     private String description;
-    @Column(columnDefinition = "integer default 1")
+
     private int statusProduct;
 
     @ManyToOne
@@ -46,17 +41,17 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(Long id, @NotEmpty(message = "Please input productName") String productName, @NotEmpty(message = "Please input productPrice") double price, @NotEmpty(message = "Please input productQuantity") int quantity, @NotEmpty(message = "Please input discount") int discount, @NotEmpty(message = "Please input realPrice") double realPrice, @NotEmpty(message = "Please input type") String type, @NotNull(message = "Please input descriptionProduct") String description, @NotEmpty(message = "Please choice status") int statusProduct, Category category) {
+    public Product(Long id, String productName, double price, int quantity, int discount, double realPrice, String description, int statusProduct, Category category, Set<ProductImage> productImage) {
         this.id = id;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.discount = discount;
         this.realPrice = realPrice;
-        this.type = type;
         this.description = description;
         this.statusProduct = statusProduct;
         this.category = category;
+        this.productImage = productImage;
     }
 
     public Long getId() {
@@ -105,14 +100,6 @@ public class Product implements Serializable {
 
     public void setRealPrice(double realPrice) {
         this.realPrice = realPrice;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getDescription() {

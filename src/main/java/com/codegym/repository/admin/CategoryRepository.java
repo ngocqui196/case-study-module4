@@ -1,6 +1,8 @@
 package com.codegym.repository.admin;
 
 import com.codegym.model.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -13,17 +15,16 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> {
 
-//    @Query(value = "select * from categories where status_category = 1 order by id", nativeQuery = true)
-//    Page<Category> findAllCategory(Pageable pageable);
-//
-//    @Query(value = "select * from categories where category_name = ?1 and status_category = 1 order by category_name asc", nativeQuery = true)
-//    Page<Category> findAllByCategoryName(String nameCategory, Pageable pageable);
+    @Query(value = "select * from categories where status_category = 1 order by id", nativeQuery = true)
+    Iterable<Category> findAll();
+
+    Page<Category> findAllByCategoryNameContaining(String nameCategory, Pageable pageable);
 
     @Query(value = "select * from categories where status_category = 1 order by id", nativeQuery = true)
-    Iterable<Category> findAllCategory();
+    Page<Category> findAllCategory(Pageable pageable);
 
     @Query(value = "select * from categories where status_category = 1 and id = ?1", nativeQuery = true)
-    Category findById(int id);
+    Optional<Category> findById(Long id);
 
     @Modifying
     @Transactional

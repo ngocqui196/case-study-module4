@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/views/layout :: head">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    Search by first name:
+    <input name="s" type="text" th:value="${keyword}"/>
+    <input type="submit" value="Search"/>
+</form>
+<div class="row">
+    <div class="container">
+        <h2 class="font-weight-bold text-center">Product</h2>
+        <hr>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <table border="1" style="width: 100%">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th style="width: 10%">Edit</th>
+                        <th style="width: 10%">Delete</th>
+                    </tr>
+                    <th:block th:each="product : ${products}">
+                        <tr>
+                            <td th:text="${products.}"></td>
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.description}"></td>
+                            <td>
+                                <a class="btn btn-primary" th:href="@{/admin/category-edit/__${category.id}__ }">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" id="deleteButton" th:href="@{/admin/category-delete/__${category.id}__ }">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/views/layout :: footer"></footer>
+</body>
+</html>

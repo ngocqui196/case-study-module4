@@ -14,8 +14,8 @@
         <th:block th:if="${message}">
             <p th:text="${message}"></p>
         </th:block>
-        <a th:href="@{/templates/views/admin/category/list}">Category list</a>
-        <form th:action="@{/templates/views/admin/category/create}" th:object="${category}" method="post">
+        <a th:href="@{/admin/category/list}">Category list</a>
+        <form th:action="@{/admin/category/create}" th:object="${category}" method="post">
             <div class="form-group row">
                 <div class="col-md-2"></div>
                 <label class="col-md-2 colFormLabel">Category Name</label>
