@@ -2,9 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login Seller</title>
 </head>
 <body>
-
+<form th:action="@{/check_login}" method="post">
+    <input type="text" name="seller" placeholder="Enter account">
+    <input type="password" name="password">
+    <input type="submit" value="Dang nhap">
+</form>
 </body>
 </html>

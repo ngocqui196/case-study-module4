@@ -88,8 +88,8 @@
                 </ul>
             </div>
             <div class="search_box">
-                <form>
-                    <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+                <form th:action="@{/search}">
+                    <input type="text" name="username"><input type="submit" value="">
                 </form>
             </div>
             <div class="clear"></div>

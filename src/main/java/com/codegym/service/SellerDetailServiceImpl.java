@@ -20,9 +20,15 @@ public class SellerDetailServiceImpl implements UserDetailsService {
     @Autowired
     private SellerRepository sellerRepository;
 
+    public Seller findSellerByUserName(String userName) {
+        return sellerRepository.findByUserName(userName);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Seller seller = sellerRepository.getOneByUserName(username);
+        System.out.println(username);
+        Seller seller = sellerRepository.findByUserName(username);
+        System.out.println(seller.toString());
 
         if (username == null) {
             throw new UsernameNotFoundException("User not found");
@@ -33,7 +39,7 @@ public class SellerDetailServiceImpl implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
 
-        UserDetails userDetails = new User(seller.getUserName(), seller.getPassword(),grantedAuthorities);
+        UserDetails userDetails = (UserDetails) new User(seller.getUserName(), seller.getPassword(),grantedAuthorities);
         return userDetails;
     }
 }

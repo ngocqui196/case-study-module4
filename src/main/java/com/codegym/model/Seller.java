@@ -21,16 +21,16 @@ public class Seller {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "userName")
+    @Column(name = "user_Name")
     private String userName;
 
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "seller_has_role",
             joinColumns = @JoinColumn(name = "seller_id",referencedColumnName = "id"),
