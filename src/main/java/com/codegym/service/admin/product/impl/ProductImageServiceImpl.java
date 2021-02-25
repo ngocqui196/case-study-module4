@@ -1,6 +1,7 @@
 package com.codegym.service.admin.product.impl;
 
 import com.codegym.model.Category;
+import com.codegym.model.Product;
 import com.codegym.model.ProductImage;
 import com.codegym.repository.admin.ProductImageRepository;
 import com.codegym.service.admin.product.ProductImageService;
@@ -28,6 +29,11 @@ public class ProductImageServiceImpl implements ProductImageService {
     @Override
     public void save(ProductImage productImage) {
         productImageRepository.save(productImage);
+    }
+
+    @Override
+    public Iterable<ProductImage> findProductImageByProduct(Product product) {
+        return productImageRepository.findAll();
     }
 
     @Override

@@ -4,39 +4,45 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 public class ProductFrom implements Serializable {
 
+
     private Long id;
-    @NotEmpty(message = "Please input productName")
-    @Size(max = 45)
+    @NotNull
+    @NotEmpty(message = "Please input Product name")
+    @Size(min = 5, max = 45)
     private String productName;
-    @NotEmpty(message = "Please input productPrice")
+
+    @NotNull(message = "Please input Product price")
     private double price;
-    @NotEmpty(message = "Please input productQuantity")
+
+    @NotNull(message = "Please input Product quantity")
     private int quantity;
-    @NotEmpty(message = "Please input discount")
+
+    @NotNull(message = "Please input Product discount")
     private int discount;
-    @NotEmpty(message = "Please input realPrice")
+
     private double realPrice;
-    @NotEmpty(message = "Please input descriptionProduct")
+
+    @NotNull
+    @NotEmpty(message = "Please input Product description")
     @Size(max = 255)
     private String description;
-    @NotEmpty
+
     private Long category_id;
-    @NotEmpty
+
+    @NotNull
     private MultipartFile images;
-    @Column(columnDefinition = "integer default 1")
+
     private int statusProduct;
 
     public ProductFrom() {
     }
 
-    public ProductFrom(Long id, @NotEmpty(message = "Please input productName") @Size(max = 45) String productName, @NotEmpty(message = "Please input productPrice") double price, @NotEmpty(message = "Please input productQuantity") int quantity, @NotEmpty(message = "Please input discount") int discount, @NotEmpty(message = "Please input realPrice") double realPrice, @NotNull(message = "Please input descriptionProduct") @Size(max = 255) String description, @NotEmpty Long category_id, @NotEmpty MultipartFile images, int statusProduct) {
+    public ProductFrom(Long id, @NotNull @NotEmpty(message = "Please input Product name") @Size(min = 5, max = 45) String productName, @NotNull(message = "Please input Product price") double price, @NotNull(message = "Please input Product quantity") int quantity, @NotNull(message = "Please input Product discount") int discount, double realPrice, @NotNull @NotEmpty(message = "Please input Product description") @Size(max = 255) String description, Long category_id,@NotNull MultipartFile images, int statusProduct) {
         this.id = id;
         this.productName = productName;
         this.price = price;

@@ -5,41 +5,122 @@
     <title>Create</title>
 </head>
 <body>
-<h1>Create Customer</h1>
-<th:block th:if="${message}">
-    <span th:text="${message}"></span>
-</th:block>
-<form th:action="@{/admin/product/create}" method="post" th:object="${product}" enctype="multipart/form-data">
-    <lable>Product Name:</lable>
-    <input type="text" th:field="*{productName}" name="productName"/>
-    <br>
-    <lable>Price:</lable>
-    <input type="number" th:field="*{price}" name="price"/>
-    <br>
-    <lable>Quantity:</lable>
-    <input type="number" th:field="*{quantity}" name="quantity"/>
-    <br>
-    <lable>Description:</lable>
-    <input type="text" th:field="*{description}" name="description"/>
-    <br>
-    <lable>RealPrice:</lable>
-    <input type="number" th:field="*{realPrice}" name="quantity"/>
-    <br>
-    <lable>Category</lable>
-    <select th:object="${categories}" name="category_id">
-        <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.categoryName}"></option>
-    </select>
-    <br>
-    <lable>Discount:</lable>
-    <input type="number" th:field="*{discount}" name="discount"/>
-    <br>
-    <lable>Upload Images:</lable>
-    <input type="file" th:field="*{images}"/>
-    <br>
-    <input th:type="hidden" name="statusProduct" id="statusProduct" value="1">
-    <input type="submit" value="Save"/>
-    <button type="reset">Reset</button>
-</form>
+<h1>Create Product</h1>
+<div class="row">
+    <div class="container">
+        <hr>
+        <th:block th:if="${message}">
+            <p th:text="${message}"></p>
+        </th:block>
+        <a th:href="@{/admin/product/list}">Product list</a>
+        <form th:action="@{/admin/product/create}" method="post" th:object="${productForm}"
+              enctype="multipart/form-data">
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product Name</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="productName" th:field="*{productName}"
+                           id="productName"
+                           placeholder="Product name">
+                    <th:block th:if="${#fields.hasErrors('productName')}">
+                        <span th:if="${#fields.hasErrors('productName')}"
+                              th:errors="*{productName}">Product name error</span>
+                    </th:block>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product price</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="number" th:field="*{price}" name="price"
+                           id="price"
+                           placeholder="Product price">
+                    <th:block th:if="${#fields.hasErrors('price')}">
+                        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Product price error</span>
+                    </th:block>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product quantity</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="number" th:field="*{quantity}" name="quantity"
+                           id="quantity" value="0"
+                           placeholder="Product quantity">
+                    <th:block th:if="${#fields.hasErrors('quantity')}">
+                        <span th:if="${#fields.hasErrors('quantity')}"
+                              th:errors="*{quantity}">Product quantity error</span>
+                    </th:block>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product description</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" th:field="*{description}" name="description"
+                           id="description"
+                           placeholder="Product description">
+                    <th:block th:if="${#fields.hasErrors('description')}">
+                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Product description error</span>
+                    </th:block>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product discount</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="number" th:field="*{discount}" name="discount"
+                           id="discount"
+                           placeholder="Product discount">
+                    <th:block th:if="${#fields.hasErrors('discount')}">
+                        <span th:if="${#fields.hasErrors('discount')}"
+                              th:errors="*{discount}">Product discount error</span>
+                    </th:block>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product category</label>
+                <div class="col-md-4">
+                    <select class="form-control" th:object="${categories}" name="category_id">
+                        <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.categoryName}"></option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Product Image</label>
+                <div class="col-md-4">
+                    <lable class="col-md-2 colFormLabel">Upload Images:</lable>
+                    <input type="file" th:field="*{images}">
+                    <th:block th:if="${error}">
+                        <p th:text="${error}"></p>
+                    </th:block>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <input th:type="hidden" name="statusProduct" id="statusProduct" value="1">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary" type="submit" value="Save">Save</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-danger" type="reset">Reset</button>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <footer th:replace="/views/layout :: footer"></footer>
 </body>
 </html>

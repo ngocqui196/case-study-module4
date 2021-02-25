@@ -13,9 +13,10 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Please input categoryName")
+    @NotEmpty(message = "Please input category name")
+    @Size(max = 255)
     private String categoryName;
-    @NotEmpty(message = "Please input descriptionCategory")
+    @NotEmpty(message = "Please input category description")
     @Size(max = 255)
     private String description;
     @Column(columnDefinition = "integer default 1")
@@ -27,8 +28,7 @@ public class Category implements Serializable {
     public Category() {
     }
 
-
-    public Category(Long id, @NotEmpty(message = "Please input categoryName") String categoryName, @NotEmpty(message = "Please input descriptionCategory") String description, @NotEmpty(message = "Please choice status") int statusCategory, Set<Product> products) {
+    public Category(Long id, @NotEmpty(message = "Please input category name") @Size(max = 255) String categoryName, @NotEmpty(message = "Please input category description") @Size(max = 255) String description, int statusCategory, Set<Product> products) {
         this.id = id;
         this.categoryName = categoryName;
         this.description = description;

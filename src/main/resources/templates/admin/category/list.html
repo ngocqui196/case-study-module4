@@ -6,47 +6,45 @@
 </head>
 <body>
 <span th:text="${message} ? ${message} : '' "></span>
-<h1 class="text-center">Product</h1>
+<h1 class="text-center">Category</h1>
 
 <br/>
 <div class="row">
     <div class="container">
-        <h2 class="font-weight-bold text-center">List product</h2>
+        <h2 class="font-weight-bold text-center">List category</h2>
         <hr>
         <form>
             Search by name Category:
             <input name="s" type="text" th:value="${keyword}"/>
             <input type="submit" value="Search"/>
         </form>
-        <a th:href="@{/admin/product/create}">Add new Product</a>
+        <a th:href="@{/admin/category/create}">Add new Category</a>
         <br>
         <br>
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <form id="remove" method="post" onsubmit="return confirm('Do you wanna delete this product?');">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form id="remove" method="post" onsubmit="return confirm('Do you wanna delete this category?');">
                     <table border="1" style="width: 100%">
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Image</th>
                             <th style="width: 10%">Edit</th>
                             <th style="width: 10%">Delete</th>
                         </tr>
-                        <th:block th:each="product : ${products}">
+                        <th:block th:each="category : ${categories}">
                             <tr>
-                                <td th:text="${product.id}"></td>
-                                <td th:text="${product.productName}"></td>
-                                <td th:text="${product.description}"></td>
-                                <td><img width="100px" height="100px"  th:src="${product.productImage.nameImage}" /></td>
+                                <td th:text="${category.id}"></td>
+                                <td th:text="${category.categoryName}"></td>
+                                <td th:text="${category.description}"></td>
                                 <td>
                                     <a class="btn btn-primary"
-                                       th:href="@{/admin/product-edit/__${product.id}__}">Edit</a>
+                                       th:href="@{/admin/category-edit/__${category.id}__}">Edit</a>
                                 </td>
                                 <td>
                                     <button class="btn btn-danger" type="submit"
-                                            th:onclick="|deleteClick('${product.id}')|">Delete
+                                            th:onclick="|deleteClick('${category.id}')|" >Delete
                                     </button>
                                 </td>
                             </tr>
@@ -54,13 +52,13 @@
                     </table>
                 </form>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-3"></div>
         </div>
         <div class="text-center">
-            <a th:href="@{'/admin/product/list'(page=${products.number})}" th:if="${products.hasPrevious()}">Previous</a>
-            <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
-            <a th:href="@{'/admin/product/list'(page=${products.number + 2})}"
-               th:if="${products.hasNext()}">Next</a>
+            <a th:href="@{'/admin/category/list'(page=${categories.number})}" th:if="${categories.hasPrevious()}">Previous</a>
+            <span th:text="${categories.number + 1}"></span>/<span th:text="${categories.totalPages}"></span>
+            <a th:href="@{'/admin/category/list'(page=${categories.number + 2})}"
+               th:if="${categories.hasNext()}">Next</a>
         </div>
     </div>
 </div>
@@ -75,7 +73,7 @@
 <script>
     function deleteClick(id) {
         console.log(id);
-        document.getElementById('remove').action = '/admin/product-delete/' + id;
+        document.getElementById('remove').action = '/admin/category-delete/' + id;
         document.getElementById('remove').method = 'POST';
     }
 </script>

@@ -6,11 +6,14 @@ import com.codegym.service.admin.product.ProductImageService;
 import com.codegym.service.admin.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,6 +35,9 @@ public class AdminController {
 
     @Autowired
     private ProductImageService productImageService;
+
+    @Value("${upload.path}")
+    private String fileUpload;
 
     @GetMapping("/category/list")
     public ModelAndView listCategory(@RequestParam("s") Optional<String> s, @RequestParam("page") Optional<Integer> page, Pageable pageable) {
@@ -60,7 +66,11 @@ public class AdminController {
     }
 
     @PostMapping("/category/create")
-    public ModelAndView saveCategory(@ModelAttribute("category") Category category) {
+    public ModelAndView saveCategory(@ModelAttribute("category") @Validated Category category, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            ModelAndView modelAndView = new ModelAndView("views/admin/category/create");
+            return modelAndView;
+        }
         categoryService.save(category);
         ModelAndView modelAndView = new ModelAndView("views/admin/category/create");
         modelAndView.addObject("category", category);
@@ -102,13 +112,21 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("views/admin/product/create");
         Iterable<Category> categoryList = categoryService.findAll();
         modelAndView.addObject("categories", categoryList);
-        modelAndView.addObject("product", new ProductFrom());
+        modelAndView.addObject("productForm", new ProductFrom());
         return modelAndView;
     }
 
     @PostMapping("/product/create")
-    public ModelAndView saveProduct(@ModelAttribute("product") ProductFrom productFrom) {
+    public ModelAndView saveProduct(@ModelAttribute("productForm") @Validated ProductFrom productFrom, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            ModelAndView modelAndView = new ModelAndView("views/admin/product/create");
+            Iterable<Category> categoryList = categoryService.findAll();
+            modelAndView.addObject("categories", categoryList);
+            return modelAndView;
+        }
         ModelAndView modelAndView = new ModelAndView("views/admin/product/create");
+        Iterable<Category> categoryList = categoryService.findAll();
+        modelAndView.addObject("categories", categoryList);
         Product product = new Product();
         product.setProductName(productFrom.getProductName());
         product.setPrice(productFrom.getPrice());
@@ -132,7 +150,8 @@ public class AdminController {
             String filename = productFrom.getImages().getOriginalFilename();
         } catch (Exception exception) {
             exception.printStackTrace();
-            modelAndView.addObject("message", "Error: " + exception.getMessage());
+            modelAndView.addObject("error", "Please input " + exception.getMessage());
+            return modelAndView;
         }
 
         productService.save(product);
@@ -149,6 +168,7 @@ public class AdminController {
     @GetMapping("/product/list")
     public ModelAndView listProduct(@RequestParam("s") Optional<String> s, @RequestParam("page") Optional<Integer> page, Pageable pageable) {
         Page<Product> products;
+
         ModelAndView modelAndView = new ModelAndView("views/admin/product/list");
         int pageNum = 0;
         if (page.isPresent() && page.get() > 1) {
@@ -158,11 +178,11 @@ public class AdminController {
         if (s.isPresent()) {
             pageable = PageRequest.of(pageNum, 10);
             products = productService.findAllByProductNameContaining(s.get(), pageable);
+
         } else {
             pageable = PageRequest.of(pageNum, 10);
             products = productService.findAllProduct(pageable);
         }
-
         modelAndView.addObject("products", products);
         return modelAndView;
     }
@@ -183,9 +203,15 @@ public class AdminController {
     @PostMapping("/product-edit")
     public ModelAndView updateProduct(@ModelAttribute("product") Product product) {
         productService.save(product);
-        ModelAndView modelAndView = new ModelAndView("views/admin/product/edit");
+        ModelAndView modelAndView = new ModelAndView("views/admin/product/update");
         modelAndView.addObject("product", product);
         modelAndView.addObject("message", "Product updated successfully");
+        return modelAndView;
+    }
+
+    @GetMapping("/product/view/{id}")
+    public ModelAndView viewProduct(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("views/admin/product/view)");
         return modelAndView;
     }
 }

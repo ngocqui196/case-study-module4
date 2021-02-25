@@ -23,9 +23,6 @@
                     <input class="form-control" type="text" name="categoryName" th:field="*{categoryName}"
                            id="categoryName"
                            placeholder="Name">
-                    <th:block th:if="${#fields.hasErrors('categoryName')}">
-                        <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}">Product name error</span>
-                    </th:block>
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -36,9 +33,6 @@
                     <input class="form-control" type="text" th:field="*{description}" name="description"
                            id="description"
                            placeholder="Description">
-                    <th:block th:if="${#fields.hasErrors('description')}">
-                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Product description error</span>
-                    </th:block>
                 </div>
                 <div class="col-md-4"></div>
             </div>

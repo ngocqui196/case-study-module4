@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/views/layout :: head">
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<h1>Create Customer</h1>
+<th:block th:if="${message}">
+    <span th:text="${message}"></span>
+</th:block>
+<form th:action="@{/admin/product/create}" method="post" th:object="${product}" enctype="multipart/form-data">
+    <lable>Product Name:</lable>
+    <input type="text" th:field="*{productName}" name="productName"/>
+    <br>
+    <lable>Price:</lable>
+    <input type="number" th:field="*{price}" name="price"/>
+    <br>
+    <lable>Quantity:</lable>
+    <input type="number" th:field="*{quantity}" name="quantity"/>
+    <br>
+    <lable>Description:</lable>
+    <input type="text" th:field="*{description}" name="description"/>
+    <br>
+    <lable>RealPrice:</lable>
+    <input type="number" th:field="*{realPrice}" name="quantity"/>
+    <br>
+    <lable>Category</lable>
+    <select th:object="${categories}" name="category_id">
+        <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.categoryName}"></option>
+    </select>
+    <br>
+    <lable>Discount:</lable>
+    <input type="number" th:field="*{discount}" name="discount"/>
+    <br>
+    <lable>Upload Images:</lable>
+    <input type="file" th:field="*{images}"/>
+    <br>
+    <input th:type="hidden" name="statusProduct" id="statusProduct" value="1">
+    <input type="submit" value="Save"/>
+    <button type="reset">Reset</button>
+</form>
+<footer th:replace="/views/layout :: footer"></footer>
+</body>
+</html>
