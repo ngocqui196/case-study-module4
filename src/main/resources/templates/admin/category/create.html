@@ -4,19 +4,59 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<h1 class="font-weight-bold text-center">Category Management</h1>
-<h3 class="font-weight-bold text-center">Form create Category</h3>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    h1 {
+        color: #ffffff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 72px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
 
+    h3 {
+        color: white;
+        font-family: 'Raleway', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 36px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    input[type=text], input[type=password] {
+        margin: 5px;
+        padding: 0 10px;
+        width: 200px;
+        height: 34px;
+        color: #404040;
+        background: white;
+        border: 1px solid;
+        border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+        border-radius: 2px;
+        outline: 5px solid #eff4f7;
+        -moz-outline-radius: 3px;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<body style="background: url(https://cellphones.com.vn/sforum/wp-content/uploads/2019/09/2910_Vongy30-10tiyApplestrnhlngb.jpg) no-repeat;background-size: 100%">
+<h1 class="font-weight-bold text-center" style="opacity: 0.8; color: #3f4040">Category Management</h1>
+<h3 class="font-weight-bold text-center" style="opacity: 0.8; color: #3f4040">Form create Category</h3>
 <div class="row">
-    <div class="container">
+    <div class="container table table-dark" style="opacity: 0.5">
         <hr>
         <th:block th:if="${message}">
             <p th:text="${message}"></p>
         </th:block>
-        <a th:href="@{/templates/views/admin/category/list}">Category list</a>
+        <h3 th:href="@{/templates/views/admin/category/list}">Category list</h3>
         <form th:action="@{/templates/views/admin/category/create}" th:object="${category}" method="post">
-            <div class="form-group row">
+            <div class="form-group row" style="text-align: center">
                 <div class="col-md-2"></div>
                 <label class="col-md-2 colFormLabel">Category Name</label>
                 <div class="col-md-4">
@@ -26,7 +66,7 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" style="text-align: center">
                 <div class="col-md-2"></div>
                 <label class="col-md-2 colFormLabel">Category Description</label>
                 <div class="col-md-4">
@@ -36,9 +76,16 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
-            <input th:type="hidden" name="statusCategory"
-                   id="statusCategory" value="1">
-            <div class="row">
+            <div class="form-group row" style="text-align: center">
+                <div class="col-md-2"></div>
+                <label class="col-md-2 colFormLabel">Category Description</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" th:type="hidden" name="statusCategory"
+                           id="statusCategory" value="1"
+                           placeholder="Description">
+                </div>
+            </div>
+            <div class="row" style="text-align: center">
                 <div class="col-md-5"></div>
                 <div class="col-md-1">
                     <button class="btn btn-primary" type="submit" value="Save">Save</button>

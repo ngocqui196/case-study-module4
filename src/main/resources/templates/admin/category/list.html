@@ -4,17 +4,69 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    h1 {
+        color: #3f4040;
+        font-family: 'Raleway', sans-serif;
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 72px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    h2{
+        color: #3f4040;
+        font-family: 'Raleway', sans-serif;
+        font-size: 31px;
+        font-weight: 800;
+        line-height: 36px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    a{
+        color: #3f4040;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 36px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    input[type=text], input[type=password] {
+        margin: 5px;
+        padding: 0 10px;
+        width: 200px;
+        height: 34px;
+        color: #404040;
+        background: white;
+        border: 1px solid;
+        border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+        border-radius: 2px;
+        outline: 5px solid #eff4f7;
+        -moz-outline-radius: 3px;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<body style="background: url(https://cellphones.com.vn/sforum/wp-content/uploads/2019/09/2910_Vongy30-10tiyApplestrnhlngb.jpg) no-repeat;background-size: 100%">
 <span th:text="${message} ? ${message} : '' "></span>
 <h1 class="text-center">Category</h1>
-<form>
+<form style="text-align: center">
     Search by first name:
     <input name="s" type="text" th:value="${keyword}"/>
     <input type="submit" value="Search"/>
 </form>
 <br/>
 <div class="row">
-    <div class="container">
+    <div class="container" style="text-align: center">
         <h2 class="font-weight-bold text-center">List category</h2>
         <hr>
         <a href="/templates/views/admin/category/create">Add new Category</a>
@@ -23,7 +75,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <table border="1" style="width: 100%">
+                <table border="1" style="width: 100%; opacity: 0.8" class="table table-striped table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>

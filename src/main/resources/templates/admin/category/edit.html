@@ -4,11 +4,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    h1 {
+        color: #3f4040;
+        font-family: 'Raleway', sans-serif;
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 72px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        color: #3f4040;
+        font-family: 'Raleway', sans-serif;
+        font-size: 31px;
+        font-weight: 800;
+        line-height: 36px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    input[type=text], input[type=password] {
+        margin: 5px;
+        padding: 0 10px;
+        width: 200px;
+        height: 34px;
+        color: #404040;
+        background: white;
+        border: 1px solid;
+        border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+        border-radius: 2px;
+        outline: 5px solid #eff4f7;
+        -moz-outline-radius: 3px;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<body style="background: url(https://i.pinimg.com/originals/8e/4d/4a/8e4d4a01cdb86a5cfd017bef6681dc4d.jpg) no-repeat;background-size: 100%">
 <span th:text="${message} ? ${message} : '' "></span>
-<h1>Category</h1>
-<a th:href="@{/templates/views/admin/category/list}">Category list</a>
-<form th:action="@{/templates/views/admin/category-edit}" th:object="${category}" method="post">
+<h1 style="opacity: 0.8">Category</h1>
+<h2 th:href="@{/templates/views/admin/category/list}">Category list</h2>
+<form class="table-dark" style="opacity: 0.5" th:action="@{/templates/views/admin/category-edit}" th:object="${category}" method="post">
     <input type="hidden" th:field ="*{id}">
     <div class="form-group row">
         <div class="col-md-2"></div>
