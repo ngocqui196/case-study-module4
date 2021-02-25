@@ -93,7 +93,7 @@ public class AdminController {
     @PostMapping("/category-delete/{id}")
     public String removeById(@PathVariable Long id) {
         categoryService.updateById(id);
-        return "redirect:admin/category/list";
+        return "redirect:/admin/category/list";
     }
 
 
@@ -154,7 +154,7 @@ public class AdminController {
         if (page.isPresent() && page.get() > 1) {
             pageNum = page.get() - 1;
         }
-        Sort sort = Sort.by("categoryName");
+        Sort sort = Sort.by("productName");
         if (s.isPresent()) {
             pageable = PageRequest.of(pageNum, 10);
             products = productService.findAllByProductNameContaining(s.get(), pageable);
