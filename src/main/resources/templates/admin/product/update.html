@@ -1,11 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/views/layout :: head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<h2>Not Found Category!</h2>
-<a href="/templates/views/admin/category/list">Back</a>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    h1 {
+        color: #ffffff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 72px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        color: #ffffff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 31px;
+        font-weight: 800;
+        line-height: 36px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    input[type=text], input[type=password] {
+        margin: 5px;
+        padding: 0 10px;
+        width: 200px;
+        height: 34px;
+        color: #404040;
+        background: white;
+        border: 1px solid;
+        border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+        border-radius: 2px;
+        outline: 5px solid #eff4f7;
+        -moz-outline-radius: 3px;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<body style="background: url(https://limota.vn/wp-content/uploads/2019/01/Apple-TV-4K-02.png) no-repeat;background-size: 100%">
+<span th:text="${message} ? ${message} : '' "></span>
+<h1 style="opacity: 0.8; color: #3f4040">Product</h1>
+<h2 th:href="@{/templates/views/admin/product/list}">Product list</h2>
+<form class="table-dark" style="opacity: 0.5" th:action="@{/templates/views/admin/product-update}" th:object="${product}" method="post">
+    <input type="hidden" th:field ="*{id}">
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Product Name</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="productName" th:field="*{productName}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Price</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="price" th:field="*{price}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Quantity</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="quantity" th:field="*{quantity}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Discount</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="discount" th:field="*{discount}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Real Price</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="realPrice" th:field="*{realPrice}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Type</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="type" th:field="*{type}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Product Description</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="description" th:field="*{description}" />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <input type="hidden" th:field ="*{statusProduct}">
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" type="submit" value="Save">Save</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-danger" type="reset">Reset</button>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</form>
+<!--<div>-->
+<!--    <a th:href="@{'/customers'(s=${keyword}, page=${customers.number})}" th:if="${customers.hasPrevious()}">Previous</a>-->
+<!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
+<!--    <a th:href="@{'/customers'(s=${keyword}, page=${customers.number + 2})}" th:if="${customers.hasNext()}">Next</a>-->
+<!--</div>-->
+<footer th:replace="/views/layout :: footer"></footer>
 </body>
 </html>

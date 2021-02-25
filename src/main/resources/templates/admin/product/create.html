@@ -4,39 +4,119 @@
     <meta charset="UTF-8">
     <title>Create</title>
 </head>
-<body>
-<h1>Create Customer</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    h1 {
+        color: #ffffff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 72px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        color: #ffffff;
+        font-family: 'Raleway', sans-serif;
+        font-size: 31px;
+        font-weight: 800;
+        line-height: 36px;
+        margin: 0 0 24px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    input[type=text], input[type=password] {
+        margin: 5px;
+        padding: 0 10px;
+        width: 200px;
+        height: 34px;
+        color: #404040;
+        background: white;
+        border: 1px solid;
+        border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+        border-radius: 2px;
+        outline: 5px solid #eff4f7;
+        -moz-outline-radius: 3px;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<body style="background: url(https://cellphones.com.vn/sforum/wp-content/uploads/2020/10/hinh-nen-iPhone-12-face-1536x809.jpg) no-repeat;background-size: 100%">
+<h1 style="opacity: 0.8; color: #3f4040">Create Customer</h1>
 <th:block th:if="${mess}">
     <span th:text="${mess}"></span>
 </th:block>
-<form method="post" th:object="${product}" enctype="multipart/form-data">
-    <lable>Product Name:</lable>
-    <input type="text" id="name" th:field="*{productName} name="productName"/>
-    <br>
-    <lable>Price:</lable>
-    <input type="number" th:field="*{price}" name="price"/>
-    <br>
-    <lable>Quantity:</lable>
-    <input type="number" th:field="*{quantity}" name="quantity"/>
-    <br>
-    <lable>Description:</lable>
-    <input type="text" th:field="*{description}" name="description"/>
-    <br>
-    <lable>RealPrice:</lable>
-    <input type="number" th:field="*{realPrice}" name="quantity"/>
-    <br>
-    <lable>Type:</lable>
-    <input type="text" th:field="*{type}" name="type"/>
-    <br>
-    <lable>RealPrice:</lable>
-    <input type="number" th:field="*{realPrice}" name="quantity"/>
-    <br>
-    <lable>Upload Images:</lable>
-    <input type="file" th:field="*{avatar}"/>
-    <br>
-    <input type="submit" value="Save"/>
-
-    <button type="reset">Reset</button>
+<form class="table-dark" style="opacity: 0.5" method="post" th:object="${product}" enctype="multipart/form-data">
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Product Name</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="productName" th:field="*{productName}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Price</label>
+        <div class="col-md-4">
+            <input class="form-control" type="number" name="price" th:field="*{price}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Quantity</label>
+        <div class="col-md-4">
+            <input class="form-control" type="number" name="quantity" th:field="*{quantity}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Description</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="description" th:field="*{description}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Real Price</label>
+        <div class="col-md-4">
+            <input class="form-control" type="number" name="realPrice" th:field="*{realPrice}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Type</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="type" th:field="*{type}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="form-group row" style="color: white">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Upload Image:</label>
+        <div class="col-md-4">
+            <input class="form-control" type="file" th:field="*{avatar}"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" type="submit" value="Save">Save</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-danger" type="reset">Reset</button>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
 </form>
 </body>
 </html>
