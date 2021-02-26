@@ -13,14 +13,16 @@ import java.util.Optional;
 
 public interface ProductService extends IService<Product, Long> {
 
+    Iterable<Product> findAll();
+
+    Page<Product> findAllProduct(Pageable pageable);
+
     Optional<Product> findById(Long id);
 
     Page<Product> findAllByProductNameContaining(String s, Pageable pageable);
 
-    Page<Product> findAllProduct(Pageable pageable);
-
     void save(Product product);
 
-//    void remove(Product productCode);
+    void updateById(Long id);
 
 }

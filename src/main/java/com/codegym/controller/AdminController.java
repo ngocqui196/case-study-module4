@@ -12,10 +12,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -101,8 +103,9 @@ public class AdminController {
     }
 
     @PostMapping("/category-delete/{id}")
-    public String removeById(@PathVariable Long id) {
+    public String removeById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         categoryService.updateById(id);
+        redirectAttributes.addFlashAttribute("message","The category delete successfully");
         return "redirect:/admin/category/list";
     }
 
@@ -168,7 +171,6 @@ public class AdminController {
     @GetMapping("/product/list")
     public ModelAndView listProduct(@RequestParam("s") Optional<String> s, @RequestParam("page") Optional<Integer> page, Pageable pageable) {
         Page<Product> products;
-
         ModelAndView modelAndView = new ModelAndView("views/admin/product/list");
         int pageNum = 0;
         if (page.isPresent() && page.get() > 1) {
@@ -178,11 +180,11 @@ public class AdminController {
         if (s.isPresent()) {
             pageable = PageRequest.of(pageNum, 10);
             products = productService.findAllByProductNameContaining(s.get(), pageable);
-
         } else {
             pageable = PageRequest.of(pageNum, 10);
             products = productService.findAllProduct(pageable);
         }
+
         modelAndView.addObject("products", products);
         return modelAndView;
     }
@@ -192,6 +194,8 @@ public class AdminController {
         Optional<Product> product = productService.findById(id);
         if (product.isPresent()) {
             ModelAndView modelAndView = new ModelAndView("views/admin/product/update");
+            Iterable<Category> categoryList = categoryService.findAll();
+            modelAndView.addObject("categories", categoryList);
             modelAndView.addObject("product", product);
             return modelAndView;
         } else {
@@ -213,5 +217,12 @@ public class AdminController {
     public ModelAndView viewProduct(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("views/admin/product/view)");
         return modelAndView;
+    }
+
+    @PostMapping("/product-delete/{id}")
+    public String removeProductById(@PathVariable Long id, RedirectAttributes redirAttrs) {
+        productService.updateById(id);
+        redirAttrs.addFlashAttribute("message","The product delete successfully");
+        return "redirect:/admin/product/list";
     }
 }

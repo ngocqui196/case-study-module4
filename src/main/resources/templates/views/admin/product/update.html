@@ -6,11 +6,12 @@
 </head>
 <body>
 <span th:text="${message} ? ${message} : '' "></span>
-<h1 style="opacity: 0.8; color: #3f4040">Product</h1>
+<h1 class="font-weight-bold text-center">Product Management</h1>
+<h3 class="font-weight-bold text-center">Form update Product</h3>
 <h2 th:href="@{/admin/product/list}">Product list</h2>
-<form class="table-dark" style="opacity: 0.5" th:action="@{/admin/product-update}" th:object="${product}" method="post">
-    <input type="hidden" th:field ="*{id}">
-    <div class="form-group row" style="color: white">
+<form th:action="@{/admin/product-update}" th:object="${product}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <div class="form-group row">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Product Name</label>
         <div class="col-md-4">
@@ -18,7 +19,7 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-    <div class="form-group row" style="color: white">
+    <div class="form-group row">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Price</label>
         <div class="col-md-4">
@@ -26,7 +27,7 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-    <div class="form-group row" style="color: white">
+    <div class="form-group row">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Quantity</label>
         <div class="col-md-4">
@@ -34,7 +35,7 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-    <div class="form-group row" style="color: white">
+    <div class="form-group row">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Discount</label>
         <div class="col-md-4">
@@ -42,7 +43,7 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-    <div class="form-group row" style="color: white">
+    <div class="form-group row">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Real Price</label>
         <div class="col-md-4">
@@ -50,20 +51,26 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-    <lable>Category</lable>
-    <select th:object="${categories}" name="category_id">
-        <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.categoryName}"></option>
-    </select>
+    <div class="form-group row">
+        <div class="col-md-2"></div>
+        <label class="col-md-2 colFormLabel">Product category</label>
+        <div class="col-md-4">
+            <select class="form-control" th:object="${categories}" name="category_id">
+                <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.categoryName}"></option>
+            </select>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
     <br>
     <div class="form-group row" style="color: white">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Product Description</label>
         <div class="col-md-4">
-            <input class="form-control" type="text" name="description" th:field="*{description}" />
+            <input class="form-control" type="text" name="description" th:field="*{description}"/>
         </div>
         <div class="col-md-4"></div>
     </div>
-    <input type="hidden" th:field ="*{statusProduct}">
+    <input type="hidden" th:field="*{statusProduct}">
     <div class="row">
         <div class="col-md-5"></div>
         <div class="col-md-1">

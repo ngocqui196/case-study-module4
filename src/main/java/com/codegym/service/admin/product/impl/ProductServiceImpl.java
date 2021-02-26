@@ -19,13 +19,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Iterable<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAllProduct(Pageable pageable) {
+        return productRepository.findAllProduct(pageable);
     }
 
     @Override
-    public Page<Product> findAllProduct(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Iterable<Product> findAll() {
+        return productRepository.findAll();
     }
 
     @Override
@@ -38,7 +38,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllByProductNameContaining(s, pageable);
     }
 
-
     @Override
     public void save(Product product) {
         productRepository.save(product);
@@ -46,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateById(Long id) {
-
+        productRepository.updateById(id);
     }
 
 

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/views/layout :: head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<span th:text="${message} ? ${message} : '' "></span>
-<h1 class="text-center">Product</h1>
-
+<h1 class="font-weight-bold text-center">Product Management</h1>
 <br/>
 <div class="row">
     <div class="container">
         <h2 class="font-weight-bold text-center">List product</h2>
         <hr>
+        <span th:text="${message} ? ${message} : '' "></span>
         <form>
             Search by name Category:
             <input name="s" type="text" th:value="${keyword}"/>
@@ -29,8 +28,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
                             <th>Description</th>
-                            <th>Image</th>
                             <th style="width: 10%">Edit</th>
                             <th style="width: 10%">Delete</th>
                         </tr>
@@ -38,8 +38,9 @@
                             <tr>
                                 <td th:text="${product.id}"></td>
                                 <td th:text="${product.productName}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.quantity}"></td>
                                 <td th:text="${product.description}"></td>
-                                <td><img width="100px" height="100px"  th:src="${product.productImage.nameImage}" /></td>
                                 <td>
                                     <a class="btn btn-primary"
                                        th:href="@{/admin/product-edit/__${product.id}__}">Edit</a>
@@ -66,11 +67,6 @@
 </div>
 
 
-<!--<div>-->
-<!--    <a th:href="@{'/customers'(s=${keyword}, page=${customers.number})}" th:if="${customers.hasPrevious()}">Previous</a>-->
-<!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
-<!--    <a th:href="@{'/customers'(s=${keyword}, page=${customers.number + 2})}" th:if="${customers.hasNext()}">Next</a>-->
-<!--</div>-->
 <footer th:replace="/views/layout :: footer"></footer>
 <script>
     function deleteClick(id) {

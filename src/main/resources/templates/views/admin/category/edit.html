@@ -9,7 +9,7 @@
 <h1>Category</h1>
 <a th:href="@{/admin/category/list}">Category list</a>
 <form th:action="@{/admin/category-edit}" th:object="${category}" method="post">
-    <input type="hidden" th:field ="*{id}">
+    <input type="hidden" th:field="*{id}">
     <div class="form-group row">
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Category Name</label>
@@ -22,11 +22,11 @@
         <div class="col-md-2"></div>
         <label class="col-md-2 colFormLabel">Category Description</label>
         <div class="col-md-4">
-            <input class="form-control" type="text" name="description" th:field="*{description}" />
+            <input class="form-control" type="text" name="description" th:field="*{description}"/>
         </div>
         <div class="col-md-4"></div>
     </div>
-    <input type="hidden" th:field ="*{statusCategory}">
+    <input type="hidden" th:field="*{statusCategory}">
     <div class="row">
         <div class="col-md-5"></div>
         <div class="col-md-1">

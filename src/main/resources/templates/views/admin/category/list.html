@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/views/layout :: head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<span th:text="${message} ? ${message} : '' "></span>
 <h1 class="text-center">Category</h1>
 
 <br/>
@@ -13,6 +12,7 @@
     <div class="container">
         <h2 class="font-weight-bold text-center">List category</h2>
         <hr>
+        <span th:text="${message} ? ${message} : '' "></span>
         <form>
             Search by name Category:
             <input name="s" type="text" th:value="${keyword}"/>

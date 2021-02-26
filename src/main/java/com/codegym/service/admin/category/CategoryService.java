@@ -1,7 +1,6 @@
 package com.codegym.service.admin.category;
 
 
-
 import com.codegym.model.Category;
 import com.codegym.service.IService;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,8 @@ public interface CategoryService extends IService<Category, Long> {
 
     Iterable<Category> findAll();
 
+    Page<Category> findAllCategory(Pageable pageable);
+
     Optional<Category> findById(Long id);
 
     void save(Category category);
@@ -21,5 +22,4 @@ public interface CategoryService extends IService<Category, Long> {
 
     Page<Category> findAllByCategoryNameContaining(String s, Pageable pageable);
 
-    Page<Category> findAllCategory(Pageable pageable);
 }
