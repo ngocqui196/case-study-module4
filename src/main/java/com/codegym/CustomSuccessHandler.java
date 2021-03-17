@@ -47,12 +47,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             roles.add(a.getAuthority());
         }
 
-        if (isCustomer(roles)) {
-            url = "/dba";
-        } else if (isAdmin(roles)) {
+         if (isAdmin(roles)) {
             url = "/admin";
         } else if (isSeller(roles)) {
-            url = "/home";
+            url = "/seller";
         } else {
             url = "/accessDenied";
         }
@@ -61,25 +59,19 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     private boolean isSeller(List<String> roles) {
-        if (roles.contains("SELLER")) {
+        if (roles.contains("ROLE_SELLER")) {
             return true;
         }
         return false;
     }
 
     private boolean isAdmin(List<String> roles) {
-        if (roles.contains("ADMIN")) {
+        if (roles.contains("ROLE_ADMIN")) {
             return true;
         }
         return false;
     }
 
-    private boolean isCustomer(List<String> roles) {
-        if (roles.contains("CUSTOMER")) {
-            return true;
-        }
-        return false;
-    }
 
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;

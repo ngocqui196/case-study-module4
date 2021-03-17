@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 
 
 public interface SellerService extends GeneralService<Seller>, UserDetailsService {
-    Seller findByUserName(String username);
+    Seller findBySellerName (String username);
 }

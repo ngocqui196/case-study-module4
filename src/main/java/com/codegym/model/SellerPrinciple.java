@@ -4,11 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class SellerPrinciple implements UserDetails {
 
@@ -27,9 +25,9 @@ public class SellerPrinciple implements UserDetails {
     public static SellerPrinciple build(Seller seller) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : seller.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority(role.getName()) );
         }
-        return new  SellerPrinciple(seller.getId(), seller.getUserName(), seller.getPassword(), authorities);
+        return new  SellerPrinciple(seller.getId(), seller.getSellerName(), seller.getPassword(), authorities);
     }
 
     @Override

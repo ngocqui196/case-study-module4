@@ -1,6 +1,6 @@
 package com.codegym.controller;
 
-import com.codegym.model.Seller;
+//import com.codegym.model.Seller;
 import com.codegym.service.SellerDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,12 @@ public class SellerController {
     @Autowired
     private SellerDetailServiceImpl sellerDetailService;
 
-    @GetMapping("/page")
+    @GetMapping
     public String homeSeller() {
-        return "seller";
+        System.out.println("-------------");
+        System.out.println("vào đc controller");
+        System.out.println("-------------");
+        return "seller/seller";
     }
 
     @GetMapping("/search")
@@ -28,6 +31,8 @@ public class SellerController {
         modelAndView.addObject("seller",sellerDetailService.findSellerByUserName(userName));
         return modelAndView;
     }
+
+
 
 
 

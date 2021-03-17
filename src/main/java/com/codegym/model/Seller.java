@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,34 +10,31 @@ import java.util.Set;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
-    
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "avatar")
-    private String avatar;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name = "user_Name")
-    private String userName;
-
-    @Column(name = "password")
+    private String sellerName;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "seller_has_role",
+    @JoinTable(name = "seller_role",
             joinColumns = @JoinColumn(name = "seller_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_role_id",referencedColumnName = "role_id")
-    )
-    private List<Role> roles;
+            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
+
+
+    public Seller() {
+    }
+
+    public Seller(String sellerName, String password) {
+        this.sellerName = sellerName;
+        this.password = password;
+    }
+
+    public Seller(Long id, String sellerName, String password, Set<Role> roles) {
+        this.id = id;
+        this.sellerName = sellerName;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -46,44 +44,12 @@ public class Seller {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSellerName() {
+        return sellerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
     public String getPassword() {
@@ -94,11 +60,11 @@ public class Seller {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }

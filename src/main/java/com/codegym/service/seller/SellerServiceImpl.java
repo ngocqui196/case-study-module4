@@ -37,7 +37,7 @@ public class SellerServiceImpl implements SellerService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      Seller seller = sellerRepository.findByUserName(username);
+      Seller seller = sellerRepository.findBySellerName(username);
       if (seller == null ) {
           throw new UsernameNotFoundException(username);
       }
@@ -46,7 +46,7 @@ public class SellerServiceImpl implements SellerService{
     }
 
     @Override
-    public Seller findByUserName(String username) {
-        return sellerRepository.findByUserName(username);
+    public Seller findBySellerName(String sellerName) {
+        return sellerRepository.findBySellerName(sellerName);
     }
 }
