@@ -1,5 +1,6 @@
 package com.codegym;
 
+import com.codegym.service.SellerDetailServiceImpl;
 import com.codegym.service.seller.SellerService;
 import com.codegym.service.seller.SellerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private SellerServiceImpl sellerService;
 
     @Autowired
+    private SellerDetailServiceImpl detailService;
+
+    @Autowired
     private CustomSuccessHandler customSuccessHandler;
 
     @Bean
@@ -34,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         System.out.println("-----------------------");
         System.out.println("đã vào config");
         System.out.println("-----------------------");
-        auth.userDetailsService(sellerService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(detailService).passwordEncoder(passwordEncoder());
     }
 
     @Override

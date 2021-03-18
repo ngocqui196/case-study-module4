@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 //import com.codegym.model.Seller;
+//import com.codegym.service.SellerDetailServiceImpl;
 import com.codegym.service.SellerDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ public class SellerController {
 
     @Autowired
     private SellerDetailServiceImpl sellerDetailService;
+
 
     @GetMapping
     public String homeSeller() {
