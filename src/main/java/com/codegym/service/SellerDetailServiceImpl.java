@@ -14,26 +14,35 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class SellerDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private SellerRepository sellerRepository;
 
+    public Seller findSellerByUserName(String sellername) {
+        return sellerRepository.findBySellerName(sellername);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Seller seller = sellerRepository.getOneByUserName(username);
+        System.out.println("username ");
+        System.out.println(username );
+        Seller seller = sellerRepository.findBySellerName(username);
+        System.out.println(seller.toString());
 
         if (username == null) {
             throw new UsernameNotFoundException("User not found");
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        List<Role> roles = seller.getRoles();
+        Set<Role> roles = seller.getRoles();
         for (Role role: roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        UserDetails userDetails = new User(seller.getUserName(), seller.getPassword(),grantedAuthorities);
+        UserDetails userDetails = (UserDetails) new User(seller.getSellerName(), seller.getPassword(),grantedAuthorities);
         return userDetails;
     }
 }

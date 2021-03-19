@@ -38,6 +38,11 @@ public class AdminController {
 //        return modelAndView;
 //    }
 
+    @GetMapping
+    public String home() {
+        return "admin/admin";
+    }
+
     @GetMapping("/category/list")
     public ModelAndView listCategory(@RequestParam("s") Optional<String> keyword, @RequestParam("page") Optional<Integer> page) {
         Iterable<Category> categories = categoryService.findAll();
@@ -101,5 +106,5 @@ public class AdminController {
 
 //    @GetMapping("/product/create")
 //    private ModelAndView createNewProduct()
-
 }
+

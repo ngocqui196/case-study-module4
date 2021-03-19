@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
+
+
 @Entity
 @Table(name = "customers")
 public class Customer implements Serializable {
@@ -99,4 +101,8 @@ public class Customer implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
+
+
+
